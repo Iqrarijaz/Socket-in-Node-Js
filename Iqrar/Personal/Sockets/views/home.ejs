@@ -8,13 +8,19 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text" class="message">
+    <input type="text" onfocus="this.value=''"  class="message">
     <button onclick="sendMessage()"> Send Message</button>
+    <h1></h1>
     <script >
         const socket=io("http://localhost:8080")
         socket.on('connection');
+        socket.on("message",data=>{
+            document.querySelector('h1').innerHTML=data;
+        })
         const sendMessage=()=>{
-            socket.emit('message',"It Worked")
+            const messageInput=document.querySelector('.message');
+            const message=messageInput.value;
+            socket.emit('message', message)
         };
     </script>
 </body>

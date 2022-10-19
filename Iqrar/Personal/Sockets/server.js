@@ -16,6 +16,6 @@ server.listen(8080, () => {
 io.on("connection", (socket) => {
   console.log("User connected at :", socket.id);
   socket.on("message", (data) => {
-    console.log(data);
+    socket.broadcast.emit("message",data);
   });
 });
